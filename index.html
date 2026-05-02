@@ -4,43 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Modern Calculator</title>
+<title>Modern Calendar</title>
+
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<div class="calculator">
+<div class="app">
 
-<input type="text" id="screen" placeholder="0" readonly>
+<div class="header">
 
-<div class="buttons">
+<button id="prev-month">❮</button>
 
-<button>(</button>
-<button>)</button>
-<button class="clear">C</button>
-<button class="operator">%</button>
+<h2 id="month-year"></h2>
 
-<button>7</button>
-<button>8</button>
-<button>9</button>
-<button class="operator">*</button>
+<button id="next-month">❯</button>
 
-<button>4</button>
-<button>5</button>
-<button>6</button>
-<button class="operator">-</button>
+</div>
 
-<button>1</button>
-<button>2</button>
-<button>3</button>
-<button class="operator">+</button>
 
-<button>0</button>
-<button>.</button>
-<button class="operator">/</button>
-<button class="equal">=</button>
+<div class="week-days">
+
+<span>Sun</span>
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+
+</div>
+
+
+<div class="calendar" id="calendar"></div>
+
+
+<div class="stats">
+
+<div class="stat red">
+Red Days: <span id="red-count">0</span>
+</div>
+
+<div class="stat blue">
+Blue Days: <span id="blue-count">0</span>
+</div>
+
+<div class="stat total">
+Total Blocks: <span id="Total-count">0</span>
+</div>
+
+<div class="stat pay">
+Payment: Rs <span id="Total-pay">0</span>
+</div>
 
 </div>
 
