@@ -1,44 +1,26 @@
-const nums = document.querySelectorAll('.nums span');
-const counter = document.querySelector('.counter');
-const finalMessage = document.querySelector('.final');
-const replayBtn = document.getElementById('replay');
+const typingText = document.querySelector(".typing-text");
+const speedControl = document.getElementById("speedControl");
 
-/* --- Reset DOM --- */
-function resetAnimation() {
-  counter.classList.remove('hide', 'show');
-  finalMessage.classList.remove('show', 'hide');
+const message = "We Love Programming!";
+let position = 0;
+let speed = 200;
 
-  nums.forEach(num => num.className = '');
-  nums[0].classList.add('in');
+function typingEffect() {
+
+typingText.textContent = message.substring(0, position);
+
+position++;
+
+if(position > message.length){
+position = 0;
 }
 
-/* --- Run Flip Animation --- */
-function runAnimation() {
-  counter.classList.add('show');
+setTimeout(typingEffect, speed);
 
-  nums.forEach((num, idx) => {
-    num.addEventListener('animationend', (e) => {
-      const lastIdx = nums.length - 1;
-
-      if (e.animationName === 'goIn' && idx !== lastIdx) {
-        num.classList.remove('in');
-        num.classList.add('out');
-      } else if (e.animationName === 'goOut' && num.nextElementSibling) {
-        num.nextElementSibling.classList.add('in');
-      } else if (idx === lastIdx) {
-        counter.classList.add('hide');
-        finalMessage.classList.add('show');
-      }
-    });
-  });
 }
 
-/* --- Replay Button --- */
-replayBtn.addEventListener('click', () => {
-  resetAnimation();
-  runAnimation();
+typingEffect();
+
+speedControl.addEventListener("input", function(){
+speed = 400 / this.value;
 });
-
-/* --- Initialize --- */
-resetAnimation();
-runAnimation();
