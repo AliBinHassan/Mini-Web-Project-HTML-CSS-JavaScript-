@@ -1,23 +1,39 @@
-const button = document.querySelector(".ripple-btn");
+const screen = document.getElementById("screen");
+const buttons = document.querySelectorAll("button");
 
-button.addEventListener("click", function(e){
+let value = "";
 
-const rect = button.getBoundingClientRect();
+buttons.forEach(btn => {
 
-const x = e.clientX - rect.left;
-const y = e.clientY - rect.top;
+btn.addEventListener("click", () => {
 
-const ripple = document.createElement("span");
+let text = btn.innerText;
 
-ripple.classList.add("ripple");
+if(text === "C"){
 
-ripple.style.left = x + "px";
-ripple.style.top = y + "px";
+value = "";
+screen.value = "";
 
-button.appendChild(ripple);
+}
+else if(text === "="){
 
-setTimeout(()=>{
-ripple.remove();
-},600);
+try{
+screen.value = eval(value);
+value = screen.value;
+}
+catch{
+screen.value = "Error";
+value = "";
+}
+
+}
+else{
+
+value += text;
+screen.value = value;
+
+}
+
+});
 
 });
