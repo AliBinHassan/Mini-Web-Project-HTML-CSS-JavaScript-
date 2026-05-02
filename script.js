@@ -1,39 +1,67 @@
-const slides = document.querySelectorAll(".slide");
-const next = document.getElementById("next");
-const prev = document.getElementById("prev");
+const coursePrices = {
 
-let index = 0;
+"WEB DEVELOPMENT":{monthly:6000,full:42000},
+"APP DEVELOPMENT":{monthly:6000,full:42000},
+"GAME DEVELOPMENT":{monthly:8000,full:50000},
+"GRAPHIC DESIGN":{monthly:6000,full:18000},
+"UX/UI DESIGN":{monthly:6000,full:18000},
+"3D-ANIMATION":{monthly:10000,full:30000},
+"PYTHON DEVELOPMENT":{monthly:8000,full:24000},
+"PHP DEVELOPMENT":{monthly:6000,full:18000}
 
-function showSlide(i){
+};
 
-slides.forEach(slide=>{
-slide.classList.remove("active");
+const generateBtn = document.getElementById("generateBtn");
+
+generateBtn.addEventListener("click", generateBill);
+
+function generateBill(){
+
+const clientName = document.getElementById("clientName").value.trim();
+const courseSelect = document.getElementById("course");
+const customPrice = document.getElementById("customPrice").value;
+
+const selectedCourses = [...courseSelect.selectedOptions].map(o=>o.value);
+
+if(!clientName || selectedCourses.length===0){
+alert("Please fill all required fields");
+return;
+}
+
+let text = `GEMS TECH BILL\nClient: ${clientName}\n\nCourses:\n`;
+
+let totalMonthly=0;
+let totalFull=0;
+
+selectedCourses.forEach(course=>{
+
+const price = coursePrices[course];
+
+text += `${course}\nMonthly: Rs.${price.monthly}\nFull: Rs.${price.full}\n\n`;
+
+totalMonthly += price.monthly;
+totalFull += price.full;
+
 });
 
-slides[i].classList.add("active");
+text += `Custom Price: Rs.${customPrice || "N/A"}\n\n`;
+text += `Total Monthly Fee: Rs.${totalMonthly}\n`;
+text += `Total Full Fee: Rs.${totalFull}`;
+
+document.getElementById("output").textContent = text;
+
+downloadBill(clientName,text);
 
 }
 
-next.addEventListener("click",()=>{
+function downloadBill(name,data){
 
-index++;
+const blob = new Blob([data],{type:"text/plain"});
+const link = document.createElement("a");
 
-if(index >= slides.length){
-index = 0;
+link.href = URL.createObjectURL(blob);
+link.download = `${name}_bill.txt`;
+
+link.click();
+
 }
-
-showSlide(index);
-
-});
-
-prev.addEventListener("click",()=>{
-
-index--;
-
-if(index < 0){
-index = slides.length - 1;
-}
-
-showSlide(index);
-
-});
