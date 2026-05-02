@@ -1,28 +1,23 @@
-const loadingText = document.querySelector(".loading-text");
-const background = document.querySelector(".background");
+const button = document.querySelector(".ripple-btn");
 
-let progress = 0;
+button.addEventListener("click", function(e){
 
-const timer = setInterval(updateLoading, 30);
+const rect = button.getBoundingClientRect();
 
-function updateLoading(){
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
 
-progress++;
+const ripple = document.createElement("span");
 
-if(progress > 99){
-clearInterval(timer);
-}
+ripple.classList.add("ripple");
 
-loadingText.innerText = progress + "%";
+ripple.style.left = x + "px";
+ripple.style.top = y + "px";
 
-loadingText.style.opacity = map(progress,0,100,1,0);
+button.appendChild(ripple);
 
-background.style.filter = `blur(${map(progress,0,100,30,0)}px)`;
+setTimeout(()=>{
+ripple.remove();
+},600);
 
-}
-
-function map(num,inMin,inMax,outMin,outMax){
-
-return ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-
-}
+});
