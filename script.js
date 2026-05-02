@@ -1,26 +1,39 @@
-const typingText = document.querySelector(".typing-text");
-const speedControl = document.getElementById("speedControl");
+const slides = document.querySelectorAll(".slide");
+const next = document.getElementById("next");
+const prev = document.getElementById("prev");
 
-const message = "We Love Programming!";
-let position = 0;
-let speed = 200;
+let index = 0;
 
-function typingEffect() {
+function showSlide(i){
 
-typingText.textContent = message.substring(0, position);
+slides.forEach(slide=>{
+slide.classList.remove("active");
+});
 
-position++;
-
-if(position > message.length){
-position = 0;
-}
-
-setTimeout(typingEffect, speed);
+slides[i].classList.add("active");
 
 }
 
-typingEffect();
+next.addEventListener("click",()=>{
 
-speedControl.addEventListener("input", function(){
-speed = 400 / this.value;
+index++;
+
+if(index >= slides.length){
+index = 0;
+}
+
+showSlide(index);
+
+});
+
+prev.addEventListener("click",()=>{
+
+index--;
+
+if(index < 0){
+index = slides.length - 1;
+}
+
+showSlide(index);
+
 });

@@ -3,20 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Typing Animation</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 <link rel="stylesheet" href="style.css">
+
+<title>Modern Image Slider</title>
 </head>
 
 <body>
 
-<div class="container">
+<div class="slider">
 
-<h1 class="typing-text"></h1>
+<div class="slides">
 
-<div class="control">
-<label>Typing Speed</label>
-<input type="range" min="1" max="10" value="5" id="speedControl">
+<div class="slide active"
+style="background-image:url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b')"></div>
+
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5')"></div>
+
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1495467033336-2effd8753d51')"></div>
+
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1522735338363-cc7313be0ae0')"></div>
+
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1559087867-ce4c91325525')"></div>
+
 </div>
+
+<button class="nav prev" id="prev">
+<i class="fas fa-chevron-left"></i>
+</button>
+
+<button class="nav next" id="next">
+<i class="fas fa-chevron-right"></i>
+</button>
 
 </div>
 
